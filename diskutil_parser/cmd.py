@@ -15,8 +15,8 @@ def _diskutil_list() -> subprocess.CompletedProcess[bytes]:
 
 def diskutil_list() -> List[ParseResult]:
     proccess = _diskutil_list()
-    data = proccess.stdout.decode('utf-8')
+    data = proccess.stdout.decode("utf-8")
     return parse(data)
 
 
-__all__ = ['diskutil_list']
+__all__ = ["diskutil_list"]

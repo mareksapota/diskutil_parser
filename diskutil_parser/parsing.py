@@ -10,9 +10,9 @@ def parse(data: (TextIO, str)) -> List[ParseResult]:
     if isinstance(data, TextIO):
         data = data.read()
 
-    plist = plistlib.loads(data.encode('utf-8'))
+    plist = plistlib.loads(data.encode("utf-8"))
     # We're interested in the partitions too
-    adap_data = plist['AllDisksAndPartitions']
+    adap_data = plist["AllDisksAndPartitions"]
     return [deserialize(disk_data) for disk_data in adap_data]
 
 
@@ -49,4 +49,4 @@ def deserialize_part(data) -> Partition:
     return Partition(name, content_type, device_id, uuid, size, mount_point)
 
 
-__all__ = ['parse', 'deserialize', 'deserialize_disk', 'deserialize_part']
+__all__ = ["parse", "deserialize", "deserialize_disk", "deserialize_part"]
