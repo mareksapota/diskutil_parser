@@ -1,8 +1,8 @@
 import subprocess
 from typing import List
 
+from .containers import Disk
 from .parsing import parse
-from .types import ParseResult
 
 
 def _diskutil_list() -> subprocess.CompletedProcess[bytes]:
@@ -13,7 +13,7 @@ def _diskutil_list() -> subprocess.CompletedProcess[bytes]:
     )
 
 
-def diskutil_list() -> List[ParseResult]:
+def diskutil_list() -> List[Disk]:
     process = _diskutil_list()
     data = process.stdout.decode("utf-8")
     return parse(data)

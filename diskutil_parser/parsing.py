@@ -6,14 +6,14 @@ from .containers import Disk, Partition, Volume
 from .types import ParseResult
 
 
-def parse(data: TextIO | str) -> List[ParseResult]:
+def parse(data: TextIO | str) -> List[Disk]:
     if isinstance(data, TextIO):
         data = data.read()
 
     plist = plistlib.loads(data.encode("utf-8"))
     # We're interested in the partitions too
     adap_data = plist["AllDisksAndPartitions"]
-    return [deserialize(disk_data) for disk_data in adap_data]
+    return [deserialize_disk(disk_data) for disk_data in adap_data]
 
 
 def deserialize(data) -> ParseResult:
