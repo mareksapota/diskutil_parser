@@ -6,7 +6,7 @@ from .containers import Disk, Partition
 from .types import ParseResult
 
 
-def parse(data: (TextIO, str)) -> List[ParseResult]:
+def parse(data: TextIO | str) -> List[ParseResult]:
     if isinstance(data, TextIO):
         data = data.read()
 
