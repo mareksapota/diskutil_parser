@@ -1,11 +1,16 @@
+import subprocess
 from typing import List
-
-from sh import Command
 
 from .parsing import parse
 from .types import ParseResult
 
-_diskutil_list = Command('diskutil').bake('list', '-plist')
+
+def _diskutil_list() -> subprocess.CompletedProcess[bytes]:
+    return subprocess.run(
+        ["diskutil", "list", "-plist"],
+        capture_output=True,
+        check=True,
+    )
 
 
 def diskutil_list() -> List[ParseResult]:
