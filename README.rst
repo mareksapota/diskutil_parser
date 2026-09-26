@@ -12,5 +12,7 @@ Currently supported:
 
   - Partition information
 
+- Volumes
+
 If there's any feature you don't see, make an issue.
 I only wrote what I needed, but I'm sure many other features are easy to add.
