@@ -26,7 +26,7 @@ def deserialize(data) -> ParseResult:
     if "Partitions" in data:
         # This is a disk
         return deserialize_disk(data)
-    # Otherwise probably a partion
+    # Otherwise probably a partition
     return deserialize_part(data)
 
 
