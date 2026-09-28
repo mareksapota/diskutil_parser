@@ -36,23 +36,6 @@ def parse(data: TextIO | str) -> List[Disk]:
     return [deserialize_disk(disk_data) for disk_data in adap_data]
 
 
-def deserialize(data) -> ParseResult:
-    """
-    Deserialize `data` into a Disk, Partition or Volume, depending on the data.
-
-    :param data: the plist data
-    :return: a Disk, Partition, or Volume
-    """
-    if "Partitions" in data:
-        # This is a disk
-        return deserialize_disk(data)
-    if "VolumeUUID" in data:
-        # This is a volume
-        return deserialize_volume(data)
-    # Otherwise probably a partition
-    return deserialize_part(data)
-
-
 def deserialize_disk(data) -> Disk:
     size = data["Size"]
     part_scheme = data.get("Content", "")
