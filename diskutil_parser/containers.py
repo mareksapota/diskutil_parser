@@ -95,7 +95,7 @@ class Volume(Device):
         self.mount_point = mount_point
         """The mount point, if mounted, otherwise None"""
         self.os_internal = os_internal
-        """True for OS internal partitions"""
+        """True for OS internal volumes"""
 
     def is_mounted(self):
         return self.mount_point is not None and self.mount_point.exists()
