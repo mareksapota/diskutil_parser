@@ -40,7 +40,7 @@ def deserialize_disk(data) -> Disk:
     size = data["Size"]
     part_scheme = data.get("Content", "")
     device_id = data["DeviceIdentifier"]
-    partitions = [deserialize_part(part_data) for part_data in data["Partitions"]]
+    partitions = [deserialize_partition(part_data) for part_data in data["Partitions"]]
     volumes = (
         [deserialize_volume(volume_data) for volume_data in data["APFSVolumes"]]
         if "APFSVolumes" in data
@@ -50,7 +50,7 @@ def deserialize_disk(data) -> Disk:
     return Disk(size, part_scheme, device_id, partitions, volumes, os_internal)
 
 
-def deserialize_part(data) -> Partition:
+def deserialize_partition(data) -> Partition:
     # I think DiskUUID is what we want.
     uuid = data.get("DiskUUID", "")
     name = data.get("VolumeName", "")
@@ -75,6 +75,6 @@ __all__ = [
     "parse",
     "deserialize",
     "deserialize_disk",
-    "deserialize_part",
+    "deserialize_partition",
     "deserialize_volume",
 ]
