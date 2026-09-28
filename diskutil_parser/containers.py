@@ -63,9 +63,10 @@ class Partition(Device):
         name_str = f" (named {self.name})" if self.name else ""
         uuid_str = f" (DiskUUID={self.uuid})" if self.uuid else ""
         mount_str = f", mounted at {self.mount_point}" if self.mount_point else ""
+        os_internal_str = f" (OS internal: True)" if self.os_internal else ""
         return (
-            f"<Partition {self.device_id}{name_str}{uuid_str} of type {self.content_type}{mount_str},"
-            + f" {self.size} bytes>"
+            f"<Partition {self.device_id}{name_str}{uuid_str}{os_internal_str} of type"
+            f" {self.content_type}{mount_str}, {self.size} bytes>"
         )
 
 
@@ -119,6 +120,7 @@ class Disk(Device):
         device_id: str,
         partitions: List[Partition],
         volumes: List[Volume],
+        os_internal: bool,
     ):
         """
         :param size: The size of the disk
@@ -126,6 +128,7 @@ class Disk(Device):
         :param device_id: The ID of the device, like disk0
         :param partitions: The partition list
         :param volumes: The volumes list
+        :param os_internal: Is this an OS internal disk
         """
         super().__init__(device_id, size)
         self.partition_scheme = partition_scheme
@@ -134,6 +137,8 @@ class Disk(Device):
         """The partition list"""
         self.volumes = volumes
         """The volumes list"""
+        self.os_internal = os_internal
+        """True for OS internal disks"""
 
     def __repr__(self) -> str:
         part_str = (

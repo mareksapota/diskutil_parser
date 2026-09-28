@@ -43,7 +43,8 @@ def deserialize_disk(data) -> Disk:
         if "APFSVolumes" in data
         else []
     )
-    return Disk(size, part_scheme, device_id, partitions, volumes)
+    os_internal = data["OSInternal"]
+    return Disk(size, part_scheme, device_id, partitions, volumes, os_internal)
 
 
 def deserialize_part(data) -> Partition:
