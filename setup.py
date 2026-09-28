@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="diskutil_parser",
-    version="1.0.1",
+    version="1.1.0",
     packages=find_packages(),
     # metadata for upload to PyPI
     author="Kenzie Togami",
